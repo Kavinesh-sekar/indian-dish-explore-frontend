@@ -1,0 +1,27 @@
+.headerContainer{
+    background-color: #1976d2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    gap: 20px;
+    padding: 0px 15px ;
+
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+.searchBox {
+    width: 250px;
+}
+
