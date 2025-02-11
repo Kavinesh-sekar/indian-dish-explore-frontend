@@ -22,7 +22,7 @@ function App() {
           <Route path = '/' element = {<Login />} />
           <Route element={<Layout />}>
           <Route path="/dish_list" element={<DishList />} />
-            <Route path="/dish_details" element={<DishDetails />} />
+            <Route path="/dish_details/:name" element={<DishDetails />} />
             <Route path="/dish_suggester" element={<DishSuggester />} />
           
           </Route>
