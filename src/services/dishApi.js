@@ -56,3 +56,38 @@ export const getSearchResult = async(search_suggestion) =>{
         console.log('err',err);
     }
 }
+
+export const getAllIncrediate = async() =>{
+    try{
+        // console.log('sssss',search_suggestion);
+        
+        const response = await fetch(`${BackEnd_URL}/api/dish/ingredients`)
+
+        const data = await response.json();
+        console.log('ddddddddd',data);
+        
+        return data;
+
+    }catch(err){
+        console.log('err',err);
+    }
+}
+
+export const getIncrdiateBasedOnSerach = async (searchCriteria) => {
+    try {
+        const response = await fetch(`${BackEnd_URL}/api/dish/search-by-ingredients`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(searchCriteria)
+        });
+
+        const data = await response.json();
+        console.log('ddddddddd', data);
+
+        return data;
+    } catch (err) {
+        console.log('err', err);
+    }
+}

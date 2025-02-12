@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Autocomplete, TextField, Chip, Button } from "@mui/material";
-// import axios from "axios";
+import { Autocomplete, TextField, Chip, Button,ListItem ,ListItemText} from "@mui/material";
+import {getAllIncrediate,getIncrdiateBasedOnSerach}  from '../services/dishApi'
+import { Link } from "react-router-dom";
 
 const DishSuggest = () => {
     const [ingredients, setIngredients] = useState([]);  // List of all ingredients
@@ -11,8 +12,10 @@ const DishSuggest = () => {
     useEffect(() => {
         async function fetchIngredients() {
             try {
-                // const response = await axios.get("http://localhost:5000/api/ingredients");
-                // setIngredients(response.data);
+                const response = await getAllIncrediate();
+                console.log('resss suffes',response);
+                
+                setIngredients(response)
             } catch (error) {
                 console.error("Error fetching ingredients:", error);
             }
@@ -28,10 +31,10 @@ const DishSuggest = () => {
                 return;
             }
             try {
-                // const response = await axios.post("http://localhost:5000/api/search-by-ingredients", {
-                //     ingredients: selectedIngredients
-                // });
-                // setSuggestedDishes(response.data);
+                const response = await getIncrdiateBasedOnSerach({
+                    selectedIngredients :selectedIngredients
+                })
+                setSuggestedDishes(response);
             } catch (error) {
                 console.error("Error fetching dishes:", error);
             }
@@ -61,16 +64,7 @@ const DishSuggest = () => {
             />
 
             {/* Selected Ingredients */}
-            <div>
-                {selectedIngredients.length > 0 && (
-                    <div>
-                        <h3>Selected Ingredients:</h3>
-                        {selectedIngredients.map((ingredient, index) => (
-                            <Chip key={index} label={ingredient} style={{ margin: "5px" }} />
-                        ))}
-                    </div>
-                )}
-            </div>
+            
 
             {/* Suggested Dishes */}
             <div style={{ marginTop: "20px" }}>
@@ -78,9 +72,10 @@ const DishSuggest = () => {
                 {suggestedDishes.length > 0 ? (
                     <ul style={{ listStyleType: "none", padding: 0 }}>
                         {suggestedDishes.map((dish, index) => (
-                            <li key={index} style={{ fontSize: "18px", margin: "5px 0" }}>
-                                🍽 {dish.name} ({dish.state})
-                            </li>
+                       
+                            <ListItem key={dish.name} button component={Link} to={`/dish_details/${dish.name}` } >
+                            <ListItemText primary={dish.name} secondary={dish.ingredients} />
+                          </ListItem>
                         ))}
                     </ul>
                 ) : (

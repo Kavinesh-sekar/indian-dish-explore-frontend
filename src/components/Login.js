@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
-import { Button, Paper } from "@mui/material";
+import { Button, Paper ,Alert} from "@mui/material";
 import Styles from '../styles/Login.module.css'
 import { useNavigate } from "react-router-dom";
 
@@ -9,30 +9,51 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [userName, setUserName] = useState('');
-    const [Password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [alters ,setAlert] = useState(false);
 
     const handeLogin = ()=>{
-        navigate('/dish_list')
+        if(userName === 'test@gmail.com' && password === 'test@123'){
+
+            console.log('isnode login')
+            setAlert(false)
+            navigate('/dish_list')
+        }
+       else{
+            setAlert(true)
+       }
     }
 
     return (
         <>
+
             <div className={Styles.LoginContainer}>
 
-
                 <Paper className={Styles.card} elevation={3}>
+
+                    
+            <div className={Styles.infos}>
+<Alert  severity="info">UserName : test@gmail.com , Password : test@123</Alert>
+{alters? <Alert  severity="error">username or Password are incorrect</Alert> :null}
+
+</div>
                     <h2>Login</h2>
                     <div className={Styles.LoginContent}>
                         <TextField id='userName'
                             label='UserName'
+                            type="text"
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
-                            varient="standard" required />
-                        <TextField id='Standard'
-                            label='Password' varient="standard"
-                            value={Password}
-                            setPassword={(e) => setPassword(e.target.Password)}
-                            required />
+                            variant="standard" required />
+                       <TextField
+                        id="password"
+                        label="Password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} 
+                        variant="standard"
+                        required
+                    />
                         <Button variant="contained"  onClick={handeLogin} >Login</Button>
                     </div>
                 </Paper>

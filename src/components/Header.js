@@ -3,8 +3,10 @@ import Styles from '../styles/header.module.css'
 import { AppBar, Button, Typography ,Autocomplete,TextField} from "@mui/material";
 import {getSearchResult} from '../services/dishApi'
 import { useNavigate } from "react-router-dom";
-
+import { Link ,navigate} from "react-router-dom";
 const Header = ()=>{
+
+
   const [suggestionList,setSuggestionList] = useState([]);
 
   const [search,setSearch] = useState('');
@@ -37,35 +39,45 @@ const Header = ()=>{
 
   console.log('sugggested' ,suggestionList)
 
+  const handleLogout = ()=>{
+    navigate('/')
+  }
 
     return(
         <>
         <div className={Styles.headerContainer}>
 
         <div className={Styles.headerLeft}>
-          <h4 > Indian Cuisine</h4>
+        <Link to="/dish_list" className={Styles.indianCuisineLink}>
+  <h4>INDIAN CUISINE</h4>
+</Link>
 
-          <Button variant="outlined" color="red" onClick={()=>navigate('/dish_suggester')} >Suggestion</Button>
+    
+          {/* <Button variant="outlined" color= "info" className={Styles.dishBtn} onClick={()=>navigate('/dish_suggester')}  >Dish Suggestion</Button> */}
           </div>
 
-          <div className={Styles.headerRight}>
+        
+
+          <div className={Styles.headeraMiddle}>
+
+            
 
 
 <Autocomplete
     className={Styles.searchBox}
     freeSolo
-    options={suggestionList} // Keep full object
+    options={suggestionList} 
     getOptionLabel={(option) => 
         typeof option === "string" ? option : `${option.name} - ${option.state} `
     } 
  
-    style={{ width: 300, marginRight: "20px" }}
+    style={{ width: 400 }}
     renderInput={(params) => (
         <TextField
             {...params}
-            label="Search"
-            variant="outlined"
-            style={{ backgroundColor: "white" }}
+            label="Search Dish or state or ingredients "
+            variant= "filled"
+            style={{ backgroundColor: "white",color:"white"}}
             onChange={(e) => setSearch(e.target.value)}
         />
     )}
@@ -77,9 +89,12 @@ const Header = ()=>{
         }
     }}
 />
+</div>
+
+<div className={Styles.headerRight}>
 
 
-            <Button variant="outlined" color="red" >Logout</Button>
+            <Button variant="outlined" color= "error" className={Styles.logoutBtn} onClick={handleLogout} >Logout</Button>
         
             </div>
 
