@@ -63,8 +63,7 @@ const DishSuggest = () => {
                 style={{ marginBottom: "20px" }}
             />
 
-            {/* Selected Ingredients */}
-            
+         
 
             {/* Suggested Dishes */}
             <div style={{ marginTop: "20px" }}>

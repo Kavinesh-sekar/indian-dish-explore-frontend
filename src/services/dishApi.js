@@ -6,10 +6,7 @@ export const getAllDish = async () => {
     try {
 
         const response = await fetch(`${BackEnd_URL}/api/dish/list_all_dish`);
-        // const response = await fetch('http://localhost:5000/api/dish/list_all_dish');
 
-        // console.log('Response:', response);
-        // const data = 
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -22,54 +19,54 @@ export const getAllDish = async () => {
     }
 };
 
-export const getDishDetails = async(dish_name) =>{
+export const getDishDetails = async (dish_name) => {
 
-    try{
+    try {
 
-    const response = await fetch(`${BackEnd_URL}/api/dish/dish_details/${dish_name}`);
-    const data = await response.json();
-    // console.log('rrrrrrrrrrrrrr',data);
-    
+        const response = await fetch(`${BackEnd_URL}/api/dish/dish_details/${dish_name}`);
+        const data = await response.json();
+        // console.log('rrrrrrrrrrrrrr',data);
 
-    return data;
 
-    }catch(err){
+        return data;
+
+    } catch (err) {
         console.error('Failed to fetch dishes:', err);
         return [];
     }
-    
+
 
 }
 
-export const getSearchResult = async(search_suggestion) =>{
-    try{
-        console.log('sssss',search_suggestion);
-        
+export const getSearchResult = async (search_suggestion) => {
+    try {
+        console.log('sssss', search_suggestion);
+
         const response = await fetch(`${BackEnd_URL}/api/dish/dish_search/${search_suggestion}`)
 
         const data = await response.json();
-        console.log('ddddddddd',data);
-        
+        console.log('ddddddddd', data);
+
         return data;
 
-    }catch(err){
-        console.log('err',err);
+    } catch (err) {
+        console.log('err', err);
     }
 }
 
-export const getAllIncrediate = async() =>{
-    try{
+export const getAllIncrediate = async () => {
+    try {
         // console.log('sssss',search_suggestion);
-        
+
         const response = await fetch(`${BackEnd_URL}/api/dish/ingredients`)
 
         const data = await response.json();
-        console.log('ddddddddd',data);
-        
+        console.log('ddddddddd', data);
+
         return data;
 
-    }catch(err){
-        console.log('err',err);
+    } catch (err) {
+        console.log('err', err);
     }
 }
 
